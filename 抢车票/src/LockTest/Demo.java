@@ -19,7 +19,6 @@ public class Demo implements Runnable {
 
     public static void main(String[] args){
 
-
         Demo demo = new Demo();
         Thread thread1 = new Thread(demo, "s1");
         Thread thread2 = new Thread(demo, "s2");
