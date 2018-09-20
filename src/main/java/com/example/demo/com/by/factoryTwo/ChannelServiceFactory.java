@@ -20,9 +20,9 @@ public class ChannelServiceFactory{
     }
 
 
-    public void sendMessage() {
-        managedChannelServices.get("EMAIL").sendMessage();
-        managedChannelServices.get("SMS").sendMessage();
+    public void sendMessage(String queue) {
+        managedChannelServices.get(queue).sendMessage();
+        managedChannelServices.get(queue).sendMessage();
 
     }
 }

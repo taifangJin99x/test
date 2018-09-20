@@ -1,16 +1,64 @@
 package com.example.demo.com.by.factoryTwo;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+
 @Service
-public class MessageCenterTwo implements MessageCenterServiceTwo{
+public class MessageCenterTwo implements MessageCenterServiceTwo,InitializingBean {
     private final ChannelServiceFactory channelServiceFactory;
-
-    public MessageCenterTwo(ChannelServiceFactory channelServiceFactory) {
+    private final MessageQueueTwo messageQueueTwo;
+    public MessageCenterTwo(ChannelServiceFactory channelServiceFactory, MessageQueueTwo messageQueueTwo) {
         this.channelServiceFactory = channelServiceFactory;
+        this.messageQueueTwo = messageQueueTwo;
+    }
+    @Valid
+    public void sendMessage(String queue){
+
+        channelServiceFactory.sendMessage(queue);
     }
 
-    public void sendMessage(){
-        channelServiceFactory.sendMessage();
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        for (int i = 0;i<3;i++){
+            new MessageProcessThread().start();
+        }
     }
+
+    private class MessageProcessThread extends Thread {
+        @Override
+        public void run() {
+
+            String queue = null;
+
+                while (!Thread.interrupted()) {
+                    try {
+                        queue = messageQueueTwo.getQueue();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        try {
+                            Thread.sleep(1000*6);
+                        } catch (InterruptedException e1) {
+                            Thread.currentThread().interrupt();
+                        }
+
+                    }
+                    if (null != queue){
+                        MessageCenterTwo.this.sendMessage(queue);
+
+                    }else {
+                        try {
+                            Thread.sleep(1000*6);
+                        } catch (InterruptedException e1) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+
+        }
+
+    }
+
 }
