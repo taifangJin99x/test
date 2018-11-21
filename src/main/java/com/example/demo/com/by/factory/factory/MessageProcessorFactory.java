@@ -1,6 +1,7 @@
-package com.example.demo.com.by.factory;
+package com.example.demo.com.by.factory.factory;
 
-import org.springframework.stereotype.Component;
+import com.example.demo.com.by.factory.MessageEndPoint;
+import com.example.demo.com.by.factory.MessageProcessor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,13 +13,13 @@ public class MessageProcessorFactory {
 
     public synchronized void registerMessageProcessor(MessageEndPoint endPoint, MessageProcessor messageProcessor) {
 
-//        Set<MessageProcessor> messageProcessorSet = new HashSet<>();
-//        messageProcessorSet.add(messageProcessor);
-//        messageProcessors.computeIfAbsent(endPoint, k -> messageProcessorSet);
+        Set<MessageProcessor> messageProcessorSet = new HashSet<>();
+        messageProcessorSet.add(messageProcessor);
+        messageProcessors.computeIfAbsent(endPoint, k -> messageProcessorSet);
 
-        Set<MessageProcessor> set = messageProcessors.computeIfAbsent(endPoint,k->new LinkedHashSet<>());
-        if (null != set)
-            set.add(messageProcessor);
+//        Set<MessageProcessor> set = messageProcessors.computeIfAbsent(endPoint,k->new LinkedHashSet<>());
+//        if (null != set)
+//            set.add(messageProcessor);
 
     }
     public synchronized void registerDefaultMessageProcessor(MessageProcessor messageProcessor) {

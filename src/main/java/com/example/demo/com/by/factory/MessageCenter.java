@@ -1,5 +1,7 @@
 package com.example.demo.com.by.factory;
 
+import com.example.demo.com.by.factory.domain.Message;
+import com.example.demo.com.by.factory.factory.MessageProcessorFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

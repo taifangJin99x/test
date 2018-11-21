@@ -1,4 +1,4 @@
-package com.example.demo.com.by.factory;
+package com.example.demo.com.by.factory.domain;
 
 import java.io.Serializable;
 import java.util.HashMap;

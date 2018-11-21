@@ -1,4 +1,4 @@
-package com.example.demo.com.by.factoryTwo;
+package com.example.demo.com.by.factoryTwo.queue;
 
 import org.springframework.stereotype.Component;
 

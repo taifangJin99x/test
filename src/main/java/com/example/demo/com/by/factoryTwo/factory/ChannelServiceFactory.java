@@ -1,5 +1,6 @@
-package com.example.demo.com.by.factoryTwo;
+package com.example.demo.com.by.factoryTwo.factory;
 
+import com.example.demo.com.by.factoryTwo.ChannelService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,7 @@ public class ChannelServiceFactory{
         });
     }
 
-
     public void sendMessage(String queue) {
         managedChannelServices.get(queue).sendMessage();
-        managedChannelServices.get(queue).sendMessage();
-
     }
 }

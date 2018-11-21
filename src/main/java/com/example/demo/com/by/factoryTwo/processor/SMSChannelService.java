@@ -1,5 +1,6 @@
-package com.example.demo.com.by.factoryTwo;
+package com.example.demo.com.by.factoryTwo.processor;
 
+import com.example.demo.com.by.factoryTwo.ChannelService;
 import org.springframework.stereotype.Component;
 
 @Component
