@@ -10,7 +10,9 @@ public class Main{
         new Thread(new UserThread(),"threat3").start();
 
     }
-    static Lock lock = new RedisLock();
+//    static Lock lock = new RedisLock();
+
+    static Lock lock = new ZkLock();
     static class UserThread implements Runnable{
 
         @Override
