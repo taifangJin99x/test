@@ -6,6 +6,7 @@ import com.example.demo.com.by.repository.RedisServiceImpl;
 import com.example.demo.com.by.repository.UserRepostory;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +28,13 @@ public class testController {
     /**
      *      获得mysql用户列表
      */
-    @RequestMapping("/getUsers")
-    public List<User> hello() {
-        List<User> user = userRepostory.findAll();
+    @GetMapping("/getUsers")
+    @Transactional
+    public User hello() {
+        User user = new User();
+        user.setId(2);
+        int a = 5/0;
+        userRepostory.save(user);
         return user;
     }
 
